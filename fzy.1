@@ -108,7 +108,7 @@ List running processes, kill the selected process
 .BR "git checkout $(git branch | cut -c 3- | fzy)"
 Same as above, but switching git branches.
 .TP
-.BR "FILES=($(find -type f)); vi ${FILES[$(printf '%s\\n' ""${FILES[@]}"" | fzy -e query -I)]}"
+.BR "FILES=($(find -type f)); vi ${FILES[$(printf '%s\\n' \"${FILES[@]}\" | fzy -e query -I)]}"
 Use indexes to select items from an array.
 .SH AUTHOR
 John Hawthorn <john.hawthorn@gmail.com>
