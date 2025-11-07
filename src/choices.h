@@ -13,6 +13,7 @@ extern "C" {
 struct scored_result {
 	score_t score;
 	const char *str;
+	size_t index;
 };
 
 typedef struct {
@@ -39,6 +40,7 @@ size_t choices_available(choices_t *c);
 void choices_search(choices_t *c, const char *search);
 const char *choices_get(choices_t *c, size_t n);
 score_t choices_getscore(choices_t *c, size_t n);
+size_t choices_getindex(choices_t *c, size_t n);
 void choices_prev(choices_t *c);
 void choices_next(choices_t *c);
 

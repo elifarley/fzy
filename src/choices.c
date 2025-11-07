@@ -233,6 +233,7 @@ static void *choices_search_worker(void *data) {
 			if (has_match(job->search, c->strings[i])) {
 				result->list[result->size].str = c->strings[i];
 				result->list[result->size].score = match(job->search, c->strings[i]);
+				result->list[result->size].index = i;
 				result->size++;
 			}
 		}
@@ -321,7 +322,19 @@ const char *choices_get(choices_t *c, size_t n) {
 }
 
 score_t choices_getscore(choices_t *c, size_t n) {
-	return c->results[n].score;
+	if (n < c->available) {
+		return c->results[n].score;
+	} else {
+		return 0;
+	}
+}
+
+size_t choices_getindex(choices_t *c, size_t n) {
+	if (n < c->available) {
+		return c->results[n].index;
+	} else {
+		return 0;
+	}
 }
 
 void choices_prev(choices_t *c) {

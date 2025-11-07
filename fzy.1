@@ -29,6 +29,10 @@ Input prompt (default: '> ')
 Show the scores for each item.
 .
 .TP
+.BR \-I ", " \-\-show-indexes
+Show the 0-based indexes of each match instead of the matched values. Only applicable in non-interactive mode with \-e/\-\-show-matches.
+.
+.TP
 .BR \-t ", " \-\-tty =\fITTY\fR
 Use TTY instead of the default tty device (/dev/tty).
 .
@@ -103,5 +107,8 @@ List running processes, kill the selected process
 .TP
 .BR "git checkout $(git branch | cut -c 3- | fzy)"
 Same as above, but switching git branches.
+.TP
+.BR "FILES=($(find -type f)); vi ${FILES[$(printf '%s\\n' \"${FILES[@]}\" | fzy -e query -I)]}"
+Use indexes to select items from an array.
 .SH AUTHOR
 John Hawthorn <john.hawthorn@gmail.com>

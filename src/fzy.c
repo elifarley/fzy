@@ -34,9 +34,13 @@ int main(int argc, char *argv[]) {
 		choices_fread(&choices, stdin, options.input_delimiter);
 		choices_search(&choices, options.filter);
 		for (size_t i = 0; i < choices_available(&choices); i++) {
-			if (options.show_scores)
-				printf("%f\t", choices_getscore(&choices, i));
-			printf("%s\n", choices_get(&choices, i));
+			if (options.show_indexes) {
+				printf("%zu\n", choices_getindex(&choices, i));
+			} else {
+				if (options.show_scores)
+					printf("%f\t", choices_getscore(&choices, i));
+				printf("%s\n", choices_get(&choices, i));
+			}
 		}
 	} else {
 		/* interactive */

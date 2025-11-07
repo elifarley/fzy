@@ -11,6 +11,7 @@ typedef struct {
 	const char *init_search;
 	const char *tty_filename;
 	int show_scores;
+	int show_indexes;
 	unsigned int num_lines;
 	unsigned int scrolloff;
 	const char *prompt;

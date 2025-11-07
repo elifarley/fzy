@@ -157,6 +157,29 @@ TEST test_choices_large_input() {
 	PASS();
 }
 
+TEST test_choices_get_index() {
+	choices_add(&choices, "apple");    // index 0
+	choices_add(&choices, "banana");   // index 1
+	choices_add(&choices, "apricot");  // index 2
+	choices_add(&choices, "avocado");  // index 3
+
+	/* Search for "a" - should return apple, apricot, avocado (in score order) */
+	choices_search(&choices, "a");
+	ASSERT_SIZE_T_EQ(4, choices.available);
+	/* Verify the strings are in expected order */
+	ASSERT_STR_EQ("apple", choices_get(&choices, 0));
+	ASSERT_STR_EQ("apricot", choices_get(&choices, 1));
+	ASSERT_STR_EQ("avocado", choices_get(&choices, 2));
+	ASSERT_STR_EQ("banana", choices_get(&choices, 3));
+	/* Verify indexes match original positions */
+	ASSERT_SIZE_T_EQ(0, choices_getindex(&choices, 0)); // apple was at index 0
+	ASSERT_SIZE_T_EQ(2, choices_getindex(&choices, 1)); // apricot was at index 2
+	ASSERT_SIZE_T_EQ(3, choices_getindex(&choices, 2)); // avocado was at index 3
+	ASSERT_SIZE_T_EQ(1, choices_getindex(&choices, 3)); // banana was at index 1
+
+	PASS();
+}
+
 SUITE(choices_suite) {
 	SET_SETUP(setup, NULL);
 	SET_TEARDOWN(teardown, NULL);
@@ -167,4 +190,5 @@ SUITE(choices_suite) {
 	RUN_TEST(test_choices_without_search);
 	RUN_TEST(test_choices_unicode);
 	RUN_TEST(test_choices_large_input);
+	RUN_TEST(test_choices_get_index);
 }
