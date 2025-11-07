@@ -172,7 +172,6 @@ TEST test_choices_get_index() {
 	ASSERT_STR_EQ("apricot", choices_get(&choices, 1));
 	ASSERT_STR_EQ("avocado", choices_get(&choices, 2));
 	ASSERT_STR_EQ("banana", choices_get(&choices, 3));
-	
 	/* Verify indexes match original positions */
 	ASSERT_SIZE_T_EQ(0, choices_getindex(&choices, 0)); // apple was at index 0
 	ASSERT_SIZE_T_EQ(2, choices_getindex(&choices, 1)); // apricot was at index 2
