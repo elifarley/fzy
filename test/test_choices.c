@@ -166,7 +166,6 @@ TEST test_choices_get_index() {
 	/* Search for "a" - should return apple, apricot, avocado (in score order) */
 	choices_search(&choices, "a");
 	ASSERT_SIZE_T_EQ(4, choices.available);
-	
 	/* Verify the strings are in expected order */
 	ASSERT_STR_EQ("apple", choices_get(&choices, 0));
 	ASSERT_STR_EQ("apricot", choices_get(&choices, 1));
